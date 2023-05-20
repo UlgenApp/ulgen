@@ -1,0 +1,82 @@
+version: '3.9'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.1.1
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    restart: always
+
+  kafka:
+    image: confluentinc/cp-kafka:6.1.1
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+    depends_on:
+      - zookeeper
+    restart: always
+
+  ulgen-member-api:
+    image: kaanturkmen/ulgen-member-api
+    container_name: ulgen-member-api
+    ports:
+      - "443:443"
+    environment:
+      SPRING_DATASOURCE_URL: "*************"
+      SPRING_DATASOURCE_USERNAME: "postgres"
+      SPRING_DATASOURCE_PASSWORD: "*************"
+      SSL_PASSWORD: "*************"
+      SSL_PATH: "*************"
+      SSL_TYPE: "*************"
+      SECRET_SIGN_KEY_ULGEN: "*************"
+      PRODUCER_CLIENT_URL: "ulgen-producer-api:8090"
+      ROUTER_CLIENT_URL: "ulgen-routing-api:8000"
+      ULGEN_EMAIL: "*************"
+      ULGEN_EMAIL_PASSWORD: "*************"
+    volumes:
+      - ./keystore:/keystore
+    restart: always
+
+  ulgen-producer-api:
+    image: kaanturkmen/ulgen-producer-api
+    container_name: ulgen-producer-api
+    ports:
+      - "8090:8090"
+    environment:
+      KAFKA_BOOTSTRAP_SERVER_IP: "kafka:9092"
+      SERVER_PORT: "8090"
+    depends_on:
+      - kafka
+      - zookeeper
+    restart: always
+
+  ulgen-consumer-api:
+    image: kaanturkmen/ulgen-consumer-api
+    container_name: ulgen-consumer-api
+    environment:
+      SPRING_DATASOURCE_URL: "*************"
+      SPRING_DATASOURCE_USERNAME: "*************"
+      SPRING_DATASOURCE_PASSWORD: "*************"
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+    depends_on:
+      - kafka
+      - zookeeper
+    restart: always
+
+  ulgen-routing-api:
+    image: kaanturkmen/ulgen-routing-api
+    container_name: ulgen-routing-api
+    ports:
+      - "8000:8000"
+    environment:
+      GMAPS_API_KEY: "*************"
+    restart: always
