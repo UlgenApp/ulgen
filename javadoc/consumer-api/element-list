@@ -1,0 +1,7 @@
+tr.edu.ku.ulgen
+tr.edu.ku.ulgen.config
+tr.edu.ku.ulgen.dto
+tr.edu.ku.ulgen.entity
+tr.edu.ku.ulgen.repository
+tr.edu.ku.ulgen.service
+tr.edu.ku.ulgen.util

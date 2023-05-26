@@ -1,0 +1,11 @@
+tr.edu.ku.ulgen
+tr.edu.ku.ulgen.client
+tr.edu.ku.ulgen.client.fallback
+tr.edu.ku.ulgen.config
+tr.edu.ku.ulgen.controller
+tr.edu.ku.ulgen.dto
+tr.edu.ku.ulgen.entity
+tr.edu.ku.ulgen.repository
+tr.edu.ku.ulgen.response
+tr.edu.ku.ulgen.service
+tr.edu.ku.ulgen.util

@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"tr.edu.ku.ulgen"},{"l":"tr.edu.ku.ulgen.config"},{"l":"tr.edu.ku.ulgen.controller"},{"l":"tr.edu.ku.ulgen.dto"},{"l":"tr.edu.ku.ulgen.util"}];updateSearchResults();
