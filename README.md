@@ -1,3 +1,6 @@
+# Ulgen
+Ulgen is a disaster aid application that provides routing & heatmapping solutions to authorities and volunteers even though victims loses their internet connection or mobile devices.
+
 # Architecture Diagram
 
-![Architecture](https://github.com/UlgenApp/ulgen/assets/63169561/0f3bdbd2-a674-47a6-b0ac-08ae48d92dd3)
+![Architecture](https://github.com/UlgenApp/ulgen/assets/63169561/cca9de70-810c-4533-aad5-4a7f8bf5fd68)
